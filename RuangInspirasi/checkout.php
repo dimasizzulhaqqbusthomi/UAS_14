@@ -76,7 +76,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
         <h1>Pilih Produk Untuk Dipesan</h1>
       </div>
 
-      <form action="checkout_process.php" method="post" class="flex flex-col gap-2 p-4">
+      <form action="checkout_process.php" id="checkoutForm" method="post" class="flex flex-col gap-2 p-4">
         <div class="menu flex flex-col gap-3">
           <?php 
           $grand_total = 0;
@@ -152,6 +152,50 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     document.querySelectorAll('.product-checkbox').forEach(cb => {
       cb.addEventListener('change', updateGrandTotal);
     });
+
+    const nomorWhatsAppAdmin = '6287872176733'; 
+    const checkoutForm = document.getElementById('checkoutForm');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function(event) {
+
+          const nama = document.getElementById('nama').value;
+          const alamat = document.getElementById('alamat').value;
+          const totalPembayaranText = document.getElementById('grandTotal').innerText;
+
+          if (!nama || !alamat) {
+              alert('Harap isi Nama dan Alamat terlebih dahulu.');
+              event.preventDefault();
+              return;
+          }
+
+          let detailPesanan = '';
+          document.querySelectorAll('.product-checkbox:checked').forEach(cb => {
+              const itemContainer = cb.closest('.bg-gray-300');
+              const itemName = itemContainer.querySelector('.font-bold').innerText;
+              const quantity = itemContainer.querySelector('.border.py-1.px-4').innerText;
+              detailPesanan += `- ${itemName} (Qty: ${quantity})\n`;
+          });
+          
+          if (detailPesanan === '') {
+              alert('Anda belum memilih produk untuk dipesan.');
+              event.preventDefault(); 
+              return;
+          }
+          let pesanWhatsApp = `Halo, saya mau pesan.\n\n`;
+          pesanWhatsApp += `*Nama:* ${nama}\n`;
+          pesanWhatsApp += `*Alamat Pengiriman:* ${alamat}\n\n`;
+          pesanWhatsApp += `*Barang yang Dipesan:*\n${detailPesanan}\n`;
+          pesanWhatsApp += `*Total Pembayaran:* ${totalPembayaranText}\n\n`;
+          pesanWhatsApp += `Mohon segera diproses. Terima kasih.`;
+
+          const pesanEncoded = encodeURIComponent(pesanWhatsApp);
+          const urlWhatsApp = `https://wa.me/${nomorWhatsAppAdmin}?text=${pesanEncoded}`;
+          
+          window.open(urlWhatsApp, '_blank');
+          
+      });
+    }
+
   </script>
 
 </body>
