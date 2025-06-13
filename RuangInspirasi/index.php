@@ -259,7 +259,7 @@ include ("assets/config.php");
               <p class="text-lg mt-2 max-sm:text-center wa-text">
                 Tim kami siap membantu setiap kendala yang kamu alami. Laporkan masalahmu dan kami akan segera menindaklanjutinya dengan cepat dan profesional.
               </p>
-              <a href="" class="bg-green-500 p-3 mb-4 rounded-full w-60 text-center font-bold text-white hover:bg-green-600 transition-all duration-300 transform hover:scale-105 "><p>Hubungi via WhatsApp</p></a>
+               <a href="https://wa.me/6287872176733?text=Halo%2C%20saya%20tertarik%20dengan%20produk%20Anda%20di%20Ruang%20Inspirasi.%20Saya%20ingin%20bertanya%20lebih%20lanjut." class="bg-green-500 p-3 mb-4 rounded-full w-60 text-center font-bold text-white hover:bg-green-600 transition-all duration-300 transform hover:scale-105 "><p>Hubungi via WhatsApp</p></a>
             </div>
           </div>
         </div>
