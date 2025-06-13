@@ -181,7 +181,14 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
               event.preventDefault(); 
               return;
           }
+          const formatter = new Intl.DateTimeFormat('id-ID', {
+            dateStyle: 'full',
+            timeStyle: 'short', 
+            timeZone: 'Asia/Jakarta'
+          });
+          const tanggalPemesanan = formatter.format(new Date());
           let pesanWhatsApp = `Halo, saya mau pesan.\n\n`;
+          pesanWhatsApp += `*Tanggal Pesan:* ${tanggalPemesanan}\n\n`;
           pesanWhatsApp += `*Nama:* ${nama}\n`;
           pesanWhatsApp += `*Alamat Pengiriman:* ${alamat}\n\n`;
           pesanWhatsApp += `*Barang yang Dipesan:*\n${detailPesanan}\n`;
